@@ -10,7 +10,6 @@ com\kifiyapro\bunchi\modle\Picture.class
 com\kifiyapro\bunchi\dto\PetIdResponseDto.class
 com\kifiyapro\bunchi\Controller\AdoptController.class
 com\kifiyapro\bunchi\BunchiApplication.class
-com\kifiyapro\bunchi\modle\SpringBootRestClientApplication.class
 com\kifiyapro\bunchi\Controller\CustomerController.class
 com\kifiyapro\bunchi\Service\FileUploader.class
 com\kifiyapro\bunchi\dto\responseDto\UploadFileResponse.class

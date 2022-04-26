@@ -60,7 +60,7 @@ class BunchiApplicationTests {
 
 
         Customer customer = new Customer();
-        customer.setPhonenumber("0927249739");
+        customer.setPhonenumber("new");
         customer.setFullname("Buchi");
         customer.setCreatedOn(Instant.now());
 
