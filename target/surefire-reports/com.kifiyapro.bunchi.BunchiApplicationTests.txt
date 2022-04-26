@@ -1,4 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: com.kifiyapro.bunchi.BunchiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 39.782 s - in com.kifiyapro.bunchi.BunchiApplicationTests
+Tests run: 7, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 56.839 s <<< FAILURE! - in com.kifiyapro.bunchi.BunchiApplicationTests
+getListOfAdoptByweekTest  Time elapsed: 4.046 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual:
+  0
+to be greater than:
+  0
+
+	at com.kifiyapro.bunchi.BunchiApplicationTests.getListOfAdoptByweekTest(BunchiApplicationTests.java:136)
+
+saveAdoptTest  Time elapsed: 4.986 s  <<< ERROR!
+java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at com.kifiyapro.bunchi.BunchiApplicationTests.saveAdoptTest(BunchiApplicationTests.java:104)
+
+getListOfAdoptTest  Time elapsed: 0.468 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual:
+  0
+to be greater than:
+  0
+
+	at com.kifiyapro.bunchi.BunchiApplicationTests.getListOfAdoptTest(BunchiApplicationTests.java:125)
+
