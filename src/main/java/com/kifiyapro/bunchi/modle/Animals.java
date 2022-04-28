@@ -7,7 +7,7 @@ public class Animals {
     private String type;
     private String age;
     private String size;
-    private Boolean status;
+    private String status;
     private String gender;
     private Instant createdOn;
     private Instant updatedOn;
@@ -53,11 +53,11 @@ public class Animals {
         this.size = size;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

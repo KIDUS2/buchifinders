@@ -78,10 +78,21 @@ public class PetService {
 
     /***********************
      * resopnse for pet from local database  and form petfinder
-     * @param petRequestDto
+//     * @param petRequestDto
      * @return
      */
 
+    public AuthResponseDto auth(){
+        String authUrl="https://api.petfinder.com/v2/oauth2/token";
+        AuthRequestDto authRequestDto=new AuthRequestDto();
+        authRequestDto.setClient_id("HkCYe8KLy1bI4CNkls1ZpNGLmz3sq9mONesJ34AdmKSSoFHnPZ");
+        authRequestDto.setClient_secret("eQjGeT9QBqcAVMFOX5NqyZGkJiVHdL7QTnPqJXO7");
+        authRequestDto.setGrant_type("client_credentials");
+        HttpEntity <AuthRequestDto> entity = new HttpEntity <> (authRequestDto);
+        ResponseEntity<AuthResponseDto> exchange = restTemplate.exchange(authUrl, HttpMethod.POST, entity, AuthResponseDto.class);
+
+        return exchange.getBody();
+    }
     public List<PetResponseDto> get_pets(PetSearchDto petRequestDto) {
 
         List<PetResponseDto> petResponseDtos = new ArrayList<>();
@@ -106,30 +117,35 @@ public class PetService {
 
             Long remaining=petRequestDto.getLimit()-pets.size();
             //mapping pets->pet\Responsedto
-            String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJIa0NZZThLTHkxYkk0Q05rbHMxWnBOR0xtejNzcTltT05lc0ozNEFkbUtTU29GSG5QWiIsImp0aSI6ImFjNzExMWQ0NTU2OTIyNDgwNjQwYmUwMmM1NGJkNjk1ZjExNmE4ZGNjNDM5YWQzYzliOWNkMDVkMWFiNjM5YTAzMWZiMmQ4YTNhMGE0Zjg4IiwiaWF0IjoxNjUwMzkzNjY1LCJuYmYiOjE2NTAzOTM2NjUsImV4cCI6MTY1MDM5NzI2NSwic3ViIjoiIiwic2NvcGVzIjpbXX0.uGdDxyh4NfHG4F1_v6tb1v31FJp0YBLAjcstnADVtvLJEQe3jiItayiaQieQDIoC3gu7LpPrc_ErAXfX0sB52ivYWdloxg26ZX0Eic93lzW3b__ldxvBbnq1qny_BCOKNnLw5ort4GtZgko9je9gxYxvr6_1vVD0HWGu-zrI6fw0wVYwg5AYSJTx6aCU0lCSf5RdkBmQUzZ_oJqXZvikGzrlN58C6sfzp6kb2WjwHo0mWwOpIDI11dhsz0Rcb07HK7cgLB81eUa4xxHmlhK049WTofGhkbgCpegl9gAqhWYlo1DxoUAQtYCr7SYlJAEqD-E9HyLaAOa82Z2QYTN8VQ";
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + token);
-            String t="https://api.petfinder.com/v2/animals?type=dog&limit="+String.valueOf(remaining)+"&page=2";
-            HttpEntity<String> entity = new HttpEntity <> (headers);
-            ResponseEntity<ResponseDto> exchange =
-                    restTemplate.exchange(t, HttpMethod.GET, entity, com.kifiyapro.bunchi.dto.responseDto.ResponseDto.class);
-            exchange.getBody().getAnimals().forEach(animals -> {
-                if(animals.getPhotos()!=null && animals.getPhotos().length>0) {
+            try {
+                String token = auth().getAccess_token();
+                //"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJIa0NZZThLTHkxYkk0Q05rbHMxWnBOR0xtejNzcTltT05lc0ozNEFkbUtTU29GSG5QWiIsImp0aSI6IjFjZmJiNDY4ZTY0MzQ3MGQwZGViZDgzMTA4MjJlODNmMzA5Yjk4YTJmZThlYmFmNWVmYWRlMjc5YjkzMWU4NTg5MzQ2Nzg0ZDVmN2U1NzNjIiwiaWF0IjoxNjUwOTk4NzEzLCJuYmYiOjE2NTA5OTg3MTMsImV4cCI6MTY1MTAwMjMxMywic3ViIjoiIiwic2NvcGVzIjpbXX0.R8hQDg1kxT_sZrAfSKhjIbcOUHoeauEZDSMaYQP9zP2MIlm2fKs4SD8FySQS9aLJ3E8Ml45MVtR6gpj6f7NybQKMG0EkoQvdFqBxnJC2cDx5Wm4gkoVmazj_hwSeazpF2LCJ8z5ED4_RsjgbRk8pshC5GJe_Qn8xVhEulhw4abhfWDQXB35SITrTN3yHlWGzlNPj-eIKZYze9EY7HdiThZ0ecyDhB9o9MJzNzDOTtYLHrt5AEE3tdiyRU5o2DcaXtyt_qlSFx_y6rz7WURctubSRvPLnmA-6Zr4i1sWq1OskF8F04qaKuPLOHD8ik4qb-ZIR3oHQkuFeWGTdA1UGIw";
+                HttpHeaders headers = new HttpHeaders();
+                headers.set("Authorization", "Bearer " + token);
+                String t = "https://api.petfinder.com/v2/animals?type=dog&limit=" + String.valueOf(remaining) + "&page=2";
+                HttpEntity<String> entity = new HttpEntity<>(headers);
+                ResponseEntity<ResponseDto> exchange =
+                        restTemplate.exchange(t, HttpMethod.GET, entity, com.kifiyapro.bunchi.dto.responseDto.ResponseDto.class);
+                exchange.getBody().getAnimals().forEach(animals -> {
+                    if (animals.getPhotos() != null && animals.getPhotos().length > 0) {
 //                    System.out.println(animals.getPhotos()[0].getSmall());
-                    //mapping
-                    PetResponseDto petResponseDto=new PetResponseDto();
-                    petResponseDto.setPhotos(animals.getPhotos());
-                    petResponseDto.setPetId(animals.getId());
-                    petResponseDto.setType(animals.getType());
-                    petResponseDto.setGender(animals.getGender());
-                    petResponseDto.setAge(animals.getAge());
-                    petResponseDto.setSize(animals.getSize());
-                    petResponseDto.setStatus(animals.getStatus());
+                        //mapping
+                        PetResponseDto petResponseDto = new PetResponseDto();
+                        petResponseDto.setPhotos(animals.getPhotos());
+                        petResponseDto.setPetId(animals.getId());
+                        petResponseDto.setType(animals.getType());
+                        petResponseDto.setGender(animals.getGender());
+                        petResponseDto.setAge(animals.getAge());
+                        petResponseDto.setSize(animals.getSize());
+                        petResponseDto.setStatus(animals.getStatus());
 
 
-                    petResponseDtos.add(petResponseDto);
-                }
-            });
+                        petResponseDtos.add(petResponseDto);
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 

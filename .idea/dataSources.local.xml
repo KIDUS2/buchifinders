@@ -11,5 +11,14 @@
       <introspection-schemas>@:@</introspection-schemas>
       <legacy-introspector>true</legacy-introspector>
     </data-source>
+    <data-source name="d98obo9a5ko25k@ec2-3-223-213-207.compute-1.amazonaws.com" uuid="5dccb0e0-f2c9-4859-b8e9-0e0fb9de6d0d">
+      <database-info product="PostgreSQL" version="14.2 (Ubuntu 14.2-1.pgdg20.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="14.2" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>venwliobeowxsr</user-name>
+      <legacy-introspector>true</legacy-introspector>
+    </data-source>
   </component>
 </project>

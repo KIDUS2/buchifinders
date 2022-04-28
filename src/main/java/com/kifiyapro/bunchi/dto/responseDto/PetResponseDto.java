@@ -15,8 +15,9 @@ public class PetResponseDto {
     private String age;
     private  Photos[] photos;
     private String size;
-    private Boolean status;
+    private String status;
     private String gender;
+    private Boolean goodWithChildern;
 
 
 }

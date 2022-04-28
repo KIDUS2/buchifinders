@@ -93,8 +93,9 @@ public class AdoptService {
             PetResponseDto petResponseDto = new PetResponseDto();
             petResponseDto.setType(adopt.getPet().getType());
             petResponseDto.setAge(adopt.getPet().getAge());
+            petResponseDto.setGoodWithChildern(adopt.getPet().getGoodWithChildren());
 
-            petResponseDto.setStatus(adopt.getPet().getGoodWithChildren());
+            petResponseDto.setStatus("adoptable");
             petResponseDto.setSize(adopt.getPet().getSize());
             petResponseDto.setGender(adopt.getPet().getGender());
             petResponseDto.setPetId(adopt.getPet().getPetId());

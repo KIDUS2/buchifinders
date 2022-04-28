@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/bunchi</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="d98obo9a5ko25k@ec2-3-223-213-207.compute-1.amazonaws.com" uuid="5dccb0e0-f2c9-4859-b8e9-0e0fb9de6d0d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-3-223-213-207.compute-1.amazonaws.com:5432/d98obo9a5ko25k</jdbc-url>
+    </data-source>
   </component>
 </project>
